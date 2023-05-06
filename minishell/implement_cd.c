@@ -6,36 +6,37 @@
 /*   By: stemsama <stemsama@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/15 16:18:47 by stemsama          #+#    #+#             */
-/*   Updated: 2023/04/17 23:13:24 by stemsama         ###   ########.fr       */
+/*   Updated: 2023/05/06 15:56:21 by stemsama         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-int		execute_cd(t_env **env, char **argv)
+int	execute_cd(t_env **env, char **argv)
 {
-	char *path;
+	char	*path;
 
 	path = get_path(env, argv);
 	if (!path)
 		return (ERROR);
-	if (chdir("/Users/stemsama") == -1)//probleme 2 : path non valid ? !! (valide -> "path" (../..))
+	if (chdir("/Users/stemsama") == -1)
 	{
+		//probleme 2 : path non valid ? !! (valide -> "path" (../..))
 		printf("minishell: cd: %s : No such file or directory", path);
 		return (ERROR);
 	}
-	go_to_home(env, argv);
+	go_to_home(env);
 	return (0);
 }
 
 char	*get_path(t_env **env, char **argv)
 {
-	char *path;
+	char	*path;
 
 	path = NULL;
 	//we have a probleme in ~  (replace with k sera travailler)
 	if ((!ft_strcmp(argv[1], "cd") && (!ft_strcmp(argv[2], "~")))
-	|| (!ft_strcmp(argv[1], "cd") && (argv[2] == NULL)))
+		|| (!ft_strcmp(argv[1], "cd") && (argv[2] == NULL)))
 	{
 		// printf("\n----------->>minishell: cd:HOME not set\n");
 		path = get_value(env, "HOME");
@@ -56,20 +57,20 @@ char	*get_path(t_env **env, char **argv)
 
 char	*get_value(t_env **env, char *name)
 {
-	t_env   *value2;
+	t_env	*value2;
 
 	value2 = *env;
 	while (value2 && ft_strcmp(value2->name, name))
 		value2 = value2->next;
-	if(value2 && value2->value)
+	if (value2 && value2->value)
 		return (value2->value);
 	return (NULL);
 }
 
-void	go_to_home(t_env **env, char **argv)
+void	go_to_home(t_env **env)
 {
-	char *pwd;
-	char *oldpwd;
+	char	*pwd;
+	char	*oldpwd;
 
 	pwd = get_value(env, "PWD");
 	oldpwd = get_value(env, "OLDPWD");

@@ -6,7 +6,7 @@
 /*   By: stemsama <stemsama@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/07 08:09:39 by stemsama          #+#    #+#             */
-/*   Updated: 2023/04/16 13:48:53 by stemsama         ###   ########.fr       */
+/*   Updated: 2023/04/29 15:49:08 by stemsama         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,7 +40,7 @@ int		ft_strcmp(char *s1, char *s2);
 size_t	ft_strlen(const char *str);
 char	*ft_strnstr(const char *s1, const char *s2, size_t len);
 int		ft_atoi(char *str);
-void	ft_atoi_trois(void);
+int		ft_atoi_trois(void);
 
 char	*ft_strdup(const char *src);
 void	*ft_calloc(size_t elt, size_t size);

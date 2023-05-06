@@ -6,13 +6,13 @@
 /*   By: stemsama <stemsama@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/17 23:12:41 by stemsama          #+#    #+#             */
-/*   Updated: 2023/04/18 21:09:57 by stemsama         ###   ########.fr       */
+/*   Updated: 2023/05/06 16:07:47 by stemsama         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-void pars_echo(char **argv, int *is_n, int *i)
+void	pars_echo(char **argv, int *is_n, int *i)
 {
 	int	k;
 	int	j;
@@ -34,10 +34,10 @@ void pars_echo(char **argv, int *is_n, int *i)
 				*i = *i + 1;
 			}
 			else
-				break;
+				break ;
 		}
 		else
-			break;
+			break ;
 	}
 }
 

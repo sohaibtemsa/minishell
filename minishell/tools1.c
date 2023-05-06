@@ -6,7 +6,7 @@
 /*   By: stemsama <stemsama@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/15 23:35:48 by stemsama          #+#    #+#             */
-/*   Updated: 2023/04/15 23:44:12 by stemsama         ###   ########.fr       */
+/*   Updated: 2023/05/06 15:59:54 by stemsama         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,7 +30,7 @@ void	ft_lstadd_back2(t_env **lst, t_env *new)
 	tmp->next = new;
 }
 
-t_env	*ft_lstnew_ind2(char *content, int index)
+t_env	*ft_lstnew_ind2(char *content)
 {
 	t_env	*b;
 
@@ -39,7 +39,8 @@ t_env	*ft_lstnew_ind2(char *content, int index)
 		return (NULL);
 	b->name = get_name(content);
 	b->value = get_value1(content);
-	b-> next = NULL;
+	b->n_v = content;
+	b->next = NULL;
 	return (b);
 }
 
@@ -49,11 +50,33 @@ char	*get_name(char *str)
 
 	name = ft_strchr(str, '=');
 	if (!name)
-		return(str);
+		return (str);
 	return (ft_substr(str, 0, ft_strlen(str) - ft_strlen(name)));
 }
 
 char	*get_value1(char *str)
 {
 	return (ft_strchr(str, '='));
+}
+
+t_env	*sort_env(t_env **env)
+{
+	t_env	*cur;
+	char	*sp;
+
+	cur = *env;
+	while ((*env)->next)
+	{
+		if (ft_strcmp((*env)->n_v, (*env)->next->n_v) > 0)
+		{
+			sp = (*env)->n_v;
+			(*env)->n_v = (*env)->next->n_v;
+			(*env)->next->n_v = sp;
+			(*env) = cur;
+		}
+		else
+			(*env) = (*env)->next;
+	}
+	(*env) = cur;
+	return (*env);
 }

@@ -1,40 +1,44 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   implement_env.c                                    :+:      :+:    :+:   */
+/*   handler_signals.c                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: stemsama <stemsama@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/04/15 23:13:51 by stemsama          #+#    #+#             */
-/*   Updated: 2023/05/06 15:49:59 by stemsama         ###   ########.fr       */
+/*   Created: 2023/05/06 19:08:04 by stemsama          #+#    #+#             */
+/*   Updated: 2023/05/06 19:10:22 by stemsama         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-t_env	*execute_env(t_env **env)
+void go_to_sigint(int sig)
 {
-	t_env	*tmp;
-
-	tmp = *env;
-	while (tmp)
+	// il ya les cas (heardoc & read & execution)
+	if (sig == SIGINT)
 	{
-		printf("%s", tmp->name);
-		if (tmp->value)
-			printf("%s\n", tmp->value);
-		tmp = tmp->next;
+		rl_on_new_line();
+		write(1, "\n", 1);
+		rl_replace_line("", 0);
+		rl_redisplay();
 	}
-	return (*env);
 }
 
-t_env	*creat_env(char **env)
+void go_to_sigquit(int sig)
 {
-	int		i;
-	t_env	*lst;
+	printf("|||2|||>\n");
+	if (sig == SIGQUIT)
+	{
+		exit(0);
+	}
+}
 
-	i = -1;
-	lst = NULL;
-	while (env[++i])
-		ft_lstadd_back2(&lst, ft_lstnew_ind2(env[i]));
-	return (lst);
+int	sig_nals(void)
+{
+	void	*sig1;
+	void	*sig2;
+
+	sig1 = signal(SIGINT, go_to_sigint);
+	sig2 = signal(SIGQUIT, go_to_sigquit);
+	return (1);
 }

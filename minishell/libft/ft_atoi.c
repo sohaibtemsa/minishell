@@ -6,7 +6,7 @@
 /*   By: stemsama <stemsama@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/08 10:01:01 by stemsama          #+#    #+#             */
-/*   Updated: 2023/01/29 23:17:09 by stemsama         ###   ########.fr       */
+/*   Updated: 2023/04/29 09:13:05 by stemsama         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,7 @@
 
 int	ft_atoi(char *str)
 {
-	int			res;
+	long long	res;
 	long long	cas;
 	int			sin;
 
@@ -36,13 +36,12 @@ int	ft_atoi(char *str)
 		cas = res;
 		res = res * 10 + *str++ - 48;
 		if (cas != res / 10)
-			ft_atoi_trois();
+			return (ft_atoi_trois());
 	}
 	return (res * sin);
 }
 
-void	ft_atoi_trois(void)
+int	ft_atoi_trois(void)
 {
-	write(2, "Error\n", 6);
-	exit(0);
+	return (1);
 }

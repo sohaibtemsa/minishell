@@ -6,22 +6,33 @@
 /*   By: stemsama <stemsama@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/12 14:35:42 by stemsama          #+#    #+#             */
-/*   Updated: 2023/04/19 00:15:57 by stemsama         ###   ########.fr       */
+/*   Updated: 2023/05/06 19:09:36 by stemsama         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-int main(int argc, char **argv, char **env) 
+int	main(int argc, char **argv, char **env)
 {
-	t_env *lst_env;
+	t_env	*lst_env;
+	char	*line;
+	char	**cmd;
 
+	(void) argv;
+	(void) argc;
 	lst_env = creat_env(env);
-	// execute_env(&lst_env);
-	// execute_pwd(&lst_env);
-	// execute_cd(&lst_env, argv);
-	// execute_pwd(&lst_env);
-	// execute_echo(++argv);
-	// execute_exit(++argv);
-	return 0;
+	lst_env = sort_env(&lst_env);
+	sig_nals();
+	while (1)
+	{
+		line = readline("minishell$");
+		cmd = ft_split(line, ' ');
+		parsing();
+		add_history(line);
+		if (is_builting(cmd))
+			go_to_builting(cmd, lst_env);
+		else
+			go_to_execve(&lst_env, cmd, env);
+	}
+	return (0);
 }

@@ -6,14 +6,13 @@
 /*   By: stemsama <stemsama@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/18 21:38:53 by stemsama          #+#    #+#             */
-/*   Updated: 2023/04/19 00:14:08 by stemsama         ###   ########.fr       */
+/*   Updated: 2023/05/06 16:07:25 by stemsama         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
-#include <limits.h>
 
-int ft_isnumber(char *str)
+int	ft_isnumber(char *str)
 {
 	while (*str == ' ' || *str == '\t')
 		str++;
@@ -26,21 +25,18 @@ int ft_isnumber(char *str)
 		str++;
 	}
 	// if (.. > LLONG_MAX LLONG_MIN)
-	// {
-	// }
 	return (1);
 }
 
 int	execute_exit(char **argv)
 {
 	printf("exit\n");
-	if (!*argv)
-		exit(1);
-	if (!ft_isnumber(*argv))
-	{
+	if (!argv[0])
+		exit(0);
+	if ((!ft_isnumber(argv[0])) || (ft_atoi(argv[0]) == 1))
 		printf("minishell: exit: %s: numeric argument required\n", *argv);
-	}
-	else if (++argv)
+	//num long long
+	else if (argv[1])
 	{
 		printf("minishell: exit: too many arguments\n");
 		return (1);
