@@ -27,7 +27,7 @@ int	main(int argc, char **argv, char **env)
 	{
 		line = readline("minishell$");
 		cmd = ft_split(line, ' ');
-		parsing();
+		parsing(cmd);
 		add_history(line);
 		if (is_builting(cmd))
 			go_to_builting(cmd, lst_env);
