@@ -14,5 +14,6 @@
 
 void	parsing(char **cmd)
 {
+	(void) cmd;
 	printf("--> parsing <--\n");
 }
