@@ -12,7 +12,7 @@
 
 #include "minishell.h"
 
-void	parsing(void)
+void	parsing(char **cmd)
 {
 	printf("--> parsing <--\n");
 }
