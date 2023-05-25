@@ -45,8 +45,8 @@ void	go_to_execve(t_env **lst_env, char **cmd, char **env)
 {
 	char	*path;
 	char	**all_path;
-	int		i;
-	int		pid;
+	int	i;
+	int	pid;
 
 	pid = fork();
 	if (pid == 0)
