@@ -81,6 +81,6 @@ void	go_to_sigint(int sig);
 void	go_to_sigquit(int sig);
 
 //-----------------------------------------------> parsing:
-void	parsing(void);
+void	parsing(char **cmd);
 
 #endif
